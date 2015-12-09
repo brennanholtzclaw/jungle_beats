@@ -63,6 +63,7 @@ class JungleBeatTest < Minitest::Test
   def test_it_will_play_several_sounds
     # skip
     jb = JungleBeat.new("beep bop a rockin doot dat")
+    # binding.pry
     assert_equal 6, jb.play
   end
 
@@ -95,12 +96,34 @@ class JungleBeatTest < Minitest::Test
   end
 
   def test_it_can_prepend_a_single_beat
+    # skip
+    jb = JungleBeat.new("beep bop a loo bah")
+    assert_equal 5, jb.count
+    jb.prepend("bleet")
+    assert_equal 6, jb.count
+    assert jb.includes?("bleet")
+  end
+
+  def test_it_can_prepend_multiple_beats
     skip
     jb = JungleBeat.new("beep bop a loo bah")
     assert_equal 5, jb.count
-    jb.prepend("beat")
-    assert_equal 6, jb.count
-    assert jb.includes?("beat")
+    jb.prepend("bleet blap")
+    binding.pry
+    assert_equal 7, jb.count
+    assert jb.includes?("blap")
+  end
+
+  def test_it_can_pop_multiple_beats
+    skip
+    jb = JungleBeat.new("beep bop a loo bah")
+    assert_equal 5, jb.count
+    # binding.pry
+    jb.pop(2)
+    assert_equal 3, jb.count
+    # binding.pry
+    assert jb.includes?("beep")
+    refute jb.includes?("bah")
   end
 
 end

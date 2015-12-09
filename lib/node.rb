@@ -8,7 +8,7 @@ class Node
     @data = data.shift
     @link = true unless @data == nil
     @next_node = Node.new(data) unless @data == nil
-    @all_data = []
+    @all_data = [@data]
 #   @head = false
 #   @tail = false
   end
@@ -62,4 +62,31 @@ class Node
       @next_node.append(beat)
     end
   end
+
+  def pop(how_many)
+    # still need to let pop take an argument for multiple beats
+    # binding.pry
+
+    how_many.times do
+      # binding.pry
+      if @next_node.data != nil && @next_node.next_node.data == nil
+        @pop_data = @next_node.data
+        # binding.pry
+        @next_node = nil
+        @pop_data
+      elsif @next_node.next_node.data == nil
+        @pop_data = @next_node.next_node.data
+        @next_node.next_node = nil
+        @pop_data
+      elsif @data.nil?
+        puts "my data is nil"
+        # binding.pry
+        break
+      else
+        @next_node.pop(how_many)
+      end
+    end
+    @pop_data
+  end
+
 end

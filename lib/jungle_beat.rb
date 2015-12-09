@@ -7,12 +7,6 @@ class JungleBeat
   def initialize(sounds)
     input = sounds.split
     @head = Node.new(input)
-    # @head = Node.new(@input[0])
-
-    # sounds.split[1..-1].each do |sound|
-    #   Node.new(sound)
-    # end
-
   end
 
   def play
@@ -22,30 +16,27 @@ class JungleBeat
   # Mind blowing - will .play run recursively? Just run that say line
   # several times in quick succession?
   # Am I being mind blown by something simple here?!
+  # node.next_node = self
 
   def append(beat)
     @head.append(beat)
-    # if @next_node == nil
-    #   @next_node = Node.new(beat)
-    # else
-    #   @next_node.append(beat)
-    # end
-    # input = beat.split
-    # beats_to_append = []
-    # input.each do |beat|
-    #   beats_to_append << beat
-    # end
-    # beats_to_append.each do |beat|
-    #   Node.new(beat)
-    # end
-    # end
-    # node_beat = Node.new(input)
-    # @head.append
-    # append
-    ### to the end of the list
   end
 
-  def prepend
+  def prepend(beat)
+    # binding.pry
+    old_head = @head
+    input = beat.split
+    @head = Node.new([input.shift])
+    input = input.reverse
+    while !input.empty?
+      @head.next_node = Node.new([input.shift])
+    end
+    @head.next_node = Node.new([input.shift]) if !input.empty?
+    @head.next_node = old_head
+    #test is passing in bleet blap
+    # @head.next_node.data = old_head.data
+    # @head = beat
+
     # prepend
     ### at the beginning of the list
   end
@@ -58,41 +49,47 @@ class JungleBeat
 
   def includes?(beat)
     @head.includes?(beat)
-    # includes?
-    ### gives back true or false
   end
 
-  def pop
+  def pop(how_many=1)
+    # still need to let pop take an argument for multiple beats
     # binding.pry
-    if @head.data == nil
-      "This is an empty list"
-    elsif @head.next_node.data == nil
-      pop_data = @head.data
-      @head = nil
-      pop_data
-    elsif @head.next_node.data != nil && @head.next_node.next_node.data == nil
-      pop_data = @head.next_node.data
+    # how_many.times do
       # binding.pry
-      @head.next_node = nil
-      pop_data
-    elsif @head.next_node.next_node.data == nil
-      pop_data = @head.next_node.next_node.data
-      @head.next_node.next_node = nil
-      pop_data
-    else
-      @head.pop
-    end
+      if @head.data == nil
+        "This is an empty list"
+      elsif @head.next_node.data == nil
+        pop_data = @head.data
+        @head = nil
+        pop_data
+      else
+        @head.pop(how_many)
 
-
+      # elsif @head.next_node.data != nil && @head.next_node.next_node.data == nil
+      #   pop_data = @head.next_node.data
+      #   # binding.pry
+      #   @head.next_node = nil
+      #   pop_data
+      # elsif @head.next_node.next_node.data == nil
+      #   pop_data = @head.next_node.next_node.data
+      #   @head.next_node.next_node = nil
+      #   pop_data
+      # elsif @data.nil?
+      #   puts "my data is nil"
+      #   # binding.pry
+      #   break
+      # else
+      #   @head.pop
+      # end
+      end
+    # end
     # pop
     ### one or more elements from the end of the list
-    ### (two args, default 1)
+    ### (takes num arg - default 1)
   end
 
   def count
     @head.count
-    # count
-    ### the number of elements in the list
   end
 
   def find
