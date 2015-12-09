@@ -9,19 +9,19 @@ class JungleBeatTest < Minitest::Test
   end
 
   def test_head_is_nil_with_empty_input
-    skip
+    # skip
     jb = JungleBeat.new("")
     assert_equal nil, jb.all
   end
 
   def test_it_can_find_data_in_a_single_node
-    skip
+    # skip
     jb = JungleBeat.new("beep")
     assert_equal "beep", jb.all
   end
 
-  def test_it_can_find_data_in_multiple_nodes
-    skip
+  def test_it_can_find_all_data_in_multiple_nodes
+    # skip
     jb = JungleBeat.new("beep bop boop")
     assert_equal "beep bop boop", jb.all
   end
@@ -55,15 +55,14 @@ class JungleBeatTest < Minitest::Test
   end
 
   def test_it_will_play_two_sounds
-    # skip
+    skip
     jb = JungleBeat.new("beep bop")
     assert_equal 2, jb.play
   end
 
   def test_it_will_play_several_sounds
-    # skip
+    skip
     jb = JungleBeat.new("beep bop a rockin doot dat")
-    # binding.pry
     assert_equal 6, jb.play
   end
 

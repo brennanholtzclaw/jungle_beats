@@ -10,7 +10,9 @@ class JungleBeat
   end
 
   def play
-    @head.play
+    # @head.play
+    beats = @head.find_data
+    `say -r 500 -v Boing "#{beats}"`
     @head.count
   end
   # Mind blowing - will .play run recursively? Just run that say line
@@ -100,7 +102,15 @@ class JungleBeat
   end
 
   def all
-    @head.data
+    @head.find_data if @head.data != nil
+    # binding.pry
+    # @head.find_data
+    # if @head.data == nil
+    #   nil
+    # else
+    #   @head.find_data if @head.data != nil
+    # end
+    # @head.data
     # @head.find_data
     # all
     ### return all elements in the linked list in order
