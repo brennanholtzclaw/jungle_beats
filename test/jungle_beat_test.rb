@@ -9,13 +9,21 @@ class JungleBeatTest < Minitest::Test
   end
 
   def test_head_is_nil_with_empty_input
+    skip
     jb = JungleBeat.new("")
     assert_equal nil, jb.all
   end
 
   def test_it_can_find_data_in_a_single_node
+    skip
     jb = JungleBeat.new("beep")
     assert_equal "beep", jb.all
+  end
+
+  def test_it_can_find_data_in_multiple_nodes
+    skip
+    jb = JungleBeat.new("beep bop boop")
+    assert_equal "beep bop boop", jb.all
   end
 
   def test_the_initial_node_is_head
@@ -87,9 +95,12 @@ class JungleBeatTest < Minitest::Test
   end
 
   def test_it_can_prepend_a_single_beat
+    skip
     jb = JungleBeat.new("beep bop a loo bah")
     assert_equal 5, jb.count
     jb.prepend("beat")
     assert_equal 6, jb.count
     assert jb.includes?("beat")
+  end
+
 end

@@ -104,6 +104,7 @@ class JungleBeat
 
   def all
     @head.data
+    # @head.find_data
     # all
     ### return all elements in the linked list in order
     # this will need to change to @head.find_data once recursion and
