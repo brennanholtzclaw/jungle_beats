@@ -1,7 +1,7 @@
 require 'pry'
 
 class Node
-  attr_accessor :data, :head, :tail, :next_node, :all_data
+  attr_accessor :data, :head, :tail, :next_node, :all_data, :find_counter
 
   def initialize(data)
     # binding.pry
@@ -9,6 +9,7 @@ class Node
     @link = true unless @data == nil
     @next_node = Node.new(data) unless @data == nil
     @all_data = [@data]
+    @find_counter = 0
 #   @head = false
 #   @tail = false
   end
@@ -28,13 +29,27 @@ class Node
   @all_data.flatten.join(" ")
   end
 
-  def play
-    `say -r 500 -v Boing "#{@data}"`
-    @next_node.play if @next_node.data != nil
-    #this plays recursively, but it seems slow, I may want to grab all the
-    #data and play directly from the JB class - might be easier with the
-    #extension too.
+
+  def find(index, elements)
+    if index == @find_counter
+      @data
+      # binding.pry
+    elsif @data == nil
+      puts "Not in here"
+    else
+      # binding.pry
+      @next_node.find_counter = (@find_counter + 1)
+      @next_node.find(index, elements)
+    end
   end
+
+  # def play
+  #   `say -r 500 -v Boing "#{@data}"`
+  #   @next_node.play if @next_node.data != nil
+  #   #this plays recursively, but it seems slow, I may want to grab all the
+  #   #data and play directly from the JB class - might be easier with the
+  #   #extension too.
+  # end
 
   def count
     if @data == nil

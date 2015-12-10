@@ -117,12 +117,35 @@ class JungleBeatTest < Minitest::Test
     skip
     jb = JungleBeat.new("beep bop a loo bah")
     assert_equal 5, jb.count
-    # binding.pry
     jb.pop(2)
     assert_equal 3, jb.count
-    # binding.pry
     assert jb.includes?("beep")
     refute jb.includes?("bah")
+  end
+
+  def test_find_can_return_a_single_element_in_a_single_element_list
+    jb = JungleBeat.new("bop")
+    assert_equal "bop", jb.find(0)
+  end
+
+  def test_find_can_return_the_last_element_in_a_double_list
+    jb = JungleBeat.new("bop beep")
+    assert_equal "beep", jb.find(1)
+  end
+
+  def test_find_can_return_the_last_element_in_a_longer_list
+    jb = JungleBeat.new("bop tweet dobber dow beep")
+    assert_equal "beep", jb.find(4)
+  end
+
+  def test_find_can_return_the_an_inner_element_in_a_longer_list
+    jb = JungleBeat.new("bop tweet dobber dow beep")
+    assert_equal "dobber", jb.find(2)
+  end
+
+  def test_find_can_return_multiple_elements_in_a_longer_list
+    jb = JungleBeat.new("bop tweet dobber dow beep")
+    assert_equal "dobber dow", jb.find(2, 2)
   end
 
 end
