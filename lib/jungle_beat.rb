@@ -48,26 +48,6 @@ class JungleBeat
     prepend(beats) if !beats.empty?
   end
 
-
-  #   old_head = @head
-  #   input = beat.split
-  #   @head = Node.new([input[0]])
-  #   @head.next_node = old_head
-  #   more_beats = beat.split - (beat.split.shift.split)
-  #   if !more_beats.empty?
-  #     more_beats.count.times do
-  #       old_head = @head
-  #       input = more_beats
-  #       @head = Node.new([input[0]])
-  #       new_input = input - input.shift.split
-  #       input = new_input
-  #       @head.next_node = old_head
-  #     end
-  #   end
-  #   # prepend
-  #   ### at the beginning of the list
-  # end
-
   def pop(how_many=1)
     if @head.data == nil
       "This is an empty list"
@@ -76,16 +56,17 @@ class JungleBeat
       @head = nil
       pop_data
     else
-      @head.pop(how_many)
+      (how_many - 1).times do
+        @head.pop
+      end
+      @head.pop_data
     end
-    ### one or more elements from the end of the list
-    ### (takes num arg - default 1)
+      # @head.pop(how_many)
   end
 
   def insert(index, elements)
     elements.split.count.times do
       @head.insert(index, elements.split.shift)
-      # binding.pry
       elements = (elements.split - ([elements.split.shift])).join(" ")
       index += 1
     end
@@ -108,15 +89,6 @@ class JungleBeat
     else
       all.split[index..(index + (elements - 1))].join(" ")
     end
-
-  #  for multiple elements - consider acting as if you're just getting one
-  #    then shovel that into a string, and repeat as many times as #{elements}
-    #  unless index == 0
-
-    # find
-    ### one or more elements based on arbitrary positions in the list.
-    ### The first parameter indicates the first position to return
-    ### And the second parameter specifies how many elements to return.
   end
 
   def all

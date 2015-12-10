@@ -12,6 +12,7 @@ class Node
     @find_counter = 0
     @insert_counter = 0
     @pop_data = []
+    @tail = false
   end
 
   def find_data
@@ -20,7 +21,6 @@ class Node
     @all_data = [data]
     found_data
   end
-
 
   def find(index, elements)
     if index == @find_counter
@@ -82,21 +82,37 @@ class Node
     end
   end
 
-  def pop(how_many)
-    how_many.times do
-      pop_data(how_many)
-    end
+  def pop
+    pop_data
     @pop_data.join(" ")
   end
 
-  def pop_data(how_many)
+  def pop_data
     if @next_node.data != nil && @next_node.next_node.data == nil
       @pop_data << @next_node.data
       @next_node = nil
     else
-      @next_node.pop((how_many - 1))
+      @next_node.pop
     end
     @pop_data.join
+  end
+
+  # def pop#(num)
+  #   # num.times do
+  #   if find_tail == @next_node.data
+  #     @next_node = nil
+  #   else
+  #     @next_node.pop
+  #   end
+  # end
+
+  def find_tail
+    if @next_node.data == nil
+      @tail = true
+      @data
+    else
+      @next_node.find_tail
+    end
   end
 
 end

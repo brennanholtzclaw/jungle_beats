@@ -9,19 +9,16 @@ class JungleBeatTest < Minitest::Test
   end
 
   def test_head_is_nil_with_empty_input
-    # skip
     jb = JungleBeat.new("")
     assert_equal nil, jb.all
   end
 
   def test_it_can_find_data_in_a_single_node
-    # skip
     jb = JungleBeat.new("beep")
     assert_equal "beep", jb.all
   end
 
   def test_it_can_find_all_data_in_multiple_nodes
-    # skip
     jb = JungleBeat.new("beep bop boop")
     assert_equal "beep bop boop", jb.all
   end
@@ -32,7 +29,7 @@ class JungleBeatTest < Minitest::Test
   end
 
   def test_it_will_play_a_single_beep
-    # skip
+    skip
     jb = JungleBeat.new("beep")
     assert_equal 1, jb.play
   end
@@ -43,13 +40,11 @@ class JungleBeatTest < Minitest::Test
   end
 
   def test_it_can_take_a_few_words
-    # skip
     jb = JungleBeat.new("beep bop deep")
     assert_equal 3, jb.count
   end
 
   def test_how_long_count_takes_with_lots_of_words
-    # skip
     jb = JungleBeat.new("shoop beep bop deep tok tick tack slip slap shut shoot swip")
     assert_equal 12, jb.count
   end
@@ -138,7 +133,7 @@ class JungleBeatTest < Minitest::Test
   end
 
   def test_it_can_pop_multiple_beats
-    skip
+    # skip
     jb = JungleBeat.new("beep bop a loo bah")
     assert_equal 5, jb.count
     jb.pop(2)
@@ -146,6 +141,11 @@ class JungleBeatTest < Minitest::Test
     assert_equal 3, jb.count
     assert jb.includes?("beep")
     refute jb.includes?("bah")
+  end
+
+  def test_it_can_find_its_tail
+    jb = JungleBeat.new("beep bop a loo bah")
+    assert_equal "bah", jb.head.find_tail
   end
 
   def test_find_can_return_a_single_element_in_a_single_element_list
