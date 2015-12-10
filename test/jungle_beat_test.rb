@@ -133,11 +133,10 @@ class JungleBeatTest < Minitest::Test
   end
 
   def test_it_can_pop_multiple_beats
-    # skip
+    skip
     jb = JungleBeat.new("beep bop a loo bah")
     assert_equal 5, jb.count
     jb.pop(2)
-    # binding.pry
     assert_equal 3, jb.count
     assert jb.includes?("beep")
     refute jb.includes?("bah")

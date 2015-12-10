@@ -61,7 +61,6 @@ class JungleBeat
       end
       @head.pop_data
     end
-      # @head.pop(how_many)
   end
 
   def insert(index, elements)

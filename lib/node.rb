@@ -97,15 +97,6 @@ class Node
     @pop_data.join
   end
 
-  # def pop#(num)
-  #   # num.times do
-  #   if find_tail == @next_node.data
-  #     @next_node = nil
-  #   else
-  #     @next_node.pop
-  #   end
-  # end
-
   def find_tail
     if @next_node.data == nil
       @tail = true
