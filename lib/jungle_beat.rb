@@ -35,11 +35,13 @@ class JungleBeat
   end
 
   def insert(index, elements)
-    @head.insert(index, elements)
+    elements.split.count.times do
+      @head.insert(index, elements.split.shift)
+      # binding.pry
+      elements = (elements.split - ([elements.split.shift])).join(" ")
+      index += 1
+    end
     all
-    # insert
-    ### one or more elements at an arbitrary position in the list
-    ### (two args default tail)
   end
 
   def includes?(beat)
