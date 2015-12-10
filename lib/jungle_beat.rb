@@ -21,7 +21,6 @@ class JungleBeat
   end
 
   def prepend(beat)
-    # binding.pry
     old_head = @head
     input = beat.split
     @head = Node.new([input.shift])
@@ -31,15 +30,13 @@ class JungleBeat
     end
     @head.next_node = Node.new([input.shift]) if !input.empty?
     @head.next_node = old_head
-    #test is passing in bleet blap
-    # @head.next_node.data = old_head.data
-    # @head = beat
-
     # prepend
     ### at the beginning of the list
   end
 
-  def insert
+  def insert(index, elements)
+    @head.insert(index, elements)
+    all
     # insert
     ### one or more elements at an arbitrary position in the list
     ### (two args default tail)
@@ -76,16 +73,14 @@ class JungleBeat
       all.split[index..(index + (elements - 1))].join(" ")
     end
 
+  #  for multiple elements - consider acting as if you're just getting one
+  #    then shovel that into a string, and repeat as many times as #{elements}
     #  unless index == 0
 
     # find
     ### one or more elements based on arbitrary positions in the list.
     ### The first parameter indicates the first position to return
     ### And the second parameter specifies how many elements to return.
-
-    ####=> "tee tee tee tee boop bop bop boop deep dep dep deep"
-    #### > jb.find(8, 2)
-    ####=> "deep dep"
   end
 
   def all

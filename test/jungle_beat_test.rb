@@ -148,4 +148,14 @@ class JungleBeatTest < Minitest::Test
     assert_equal "dobber dow", jb.find(2, 2)
   end
 
+  def test_insert_can_throw_a_single_element_into_an_arbitrary_index
+    jb = JungleBeat.new("bop tweet dobber dow beep")
+    assert_equal "bop tweet dobber BLIP dow beep", jb.insert(2, "BLIP")
+  end
+
+  def test_insert_can_throw_a_single_element_into_another_arbitrary_index
+    jb = JungleBeat.new("bop tweet dobber dow beep")
+    assert_equal "bop tweet dobber dow beep BLIP", jb.insert(4, "BLIP")
+  end
+
 end
