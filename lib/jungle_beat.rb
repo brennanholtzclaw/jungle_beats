@@ -10,7 +10,6 @@ class JungleBeat
   end
 
   def play
-    # @head.play
     beats = @head.find_data
     `say -r 500 -v Boing "#{beats}"`
     @head.count
@@ -18,6 +17,7 @@ class JungleBeat
 
   def append(beat)
     @head.append(beat)
+    beat.split.count
   end
 
   def prepend(beat)
@@ -87,19 +87,6 @@ class JungleBeat
 
   def all
     @head.find_data if @head.data != nil
-    # binding.pry
-    # @head.find_data
-    # if @head.data == nil
-    #   nil
-    # else
-    #   @head.find_data if @head.data != nil
-    # end
-    # @head.data
-    # @head.find_data
-    # all
-    ### return all elements in the linked list in order
-    # this will need to change to @head.find_data once recursion and
-    # multiple nodes come in to play
   end
 
 end

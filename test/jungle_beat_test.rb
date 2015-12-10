@@ -66,18 +66,6 @@ class JungleBeatTest < Minitest::Test
     assert_equal 6, jb.play
   end
 
-  def test_it_can_pop_a_single_element_list
-    jb = JungleBeat.new("beep")
-    assert_equal "beep", jb.pop
-  end
-
-  def test_it_can_pop_one_piece_from_a_double_element_list
-    jb = JungleBeat.new("beep bop")
-    assert_equal 2, jb.count
-    assert_equal "bop", jb.pop
-    assert_equal 1, jb.count
-  end
-
   def test_it_includes_a_certain_beat
     jb = JungleBeat.new("beep bop a loo bah")
     assert_equal 5, jb.count
@@ -94,13 +82,29 @@ class JungleBeatTest < Minitest::Test
     assert jb.includes?("beat")
   end
 
+  def test_it_can_append_two_beats
+    jb = JungleBeat.new("beep bop a loo bah")
+    assert_equal 5, jb.count
+    jb.append("BLIP BLAP")
+    assert_equal 7, jb.count
+    assert_equal "beep bop a loo bah BLIP BLAP", jb.all
+  end
+
+  def test_it_can_append_multiple_beats
+    jb = JungleBeat.new("beep bop a loo bah")
+    assert_equal 5, jb.count
+    jb.append("BLIP BLAP BLORP")
+    assert_equal 8, jb.count
+    assert_equal "beep bop a loo bah BLIP BLAP BLORP", jb.all
+  end
+
   def test_it_can_prepend_a_single_beat
-    # skip
     jb = JungleBeat.new("beep bop a loo bah")
     assert_equal 5, jb.count
     jb.prepend("bleet")
     assert_equal 6, jb.count
     assert jb.includes?("bleet")
+    assert_equal "bleet beep bop a loo bah", jb.all
   end
 
   def test_it_can_prepend_multiple_beats
@@ -111,6 +115,18 @@ class JungleBeatTest < Minitest::Test
     binding.pry
     assert_equal 7, jb.count
     assert jb.includes?("blap")
+  end
+
+  def test_it_can_pop_a_single_element_list
+    jb = JungleBeat.new("beep")
+    assert_equal "beep", jb.pop
+  end
+
+  def test_it_can_pop_one_piece_from_a_double_element_list
+    jb = JungleBeat.new("beep bop")
+    assert_equal 2, jb.count
+    assert_equal "bop", jb.pop
+    assert_equal 1, jb.count
   end
 
   def test_it_can_pop_multiple_beats
