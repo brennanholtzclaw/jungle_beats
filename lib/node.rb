@@ -11,11 +11,14 @@ class Node
     @all_data = [@data]
     @find_counter = 0
     @insert_counter = 0
+    @pop_data = []
   end
 
   def find_data
     @all_data = @all_data << @next_node.find_data unless @next_node.data == nil
-    @all_data.flatten.join(" ")
+    found_data = @all_data.flatten.join(" ")
+    @all_data = [data]
+    found_data
   end
 
 
@@ -88,26 +91,31 @@ class Node
   end
 
   def pop(how_many)
+    how_many.times do
+      pop_data(how_many)
+    end
+    @pop_data.join(" ")
     # still need to let pop take an argument for multiple beats
     # binding.pry
 
-    how_many.times do
+  end
+
+  def pop_data(how_many)
+    # how_many.times do
       if @next_node.data != nil && @next_node.next_node.data == nil
-        @pop_data = @next_node.data
+        @pop_data << @next_node.data
         @next_node = nil
-        @pop_data
-      elsif @next_node.next_node.data == nil
-        @pop_data = @next_node.next_node.data
-        @next_node.next_node = nil
-        @pop_data
-      elsif @data.nil?
-        puts "my data is nil"
-        break
+      # elsif @next_node.next_node.data == nil
+      #   @pop_data << @next_node.next_node.data
+      #   @next_node.next_node = nil
+      # elsif @data.nil?
+      #   puts "my data is nil"
+      #   break
       else
-        @next_node.pop(how_many)
+        @next_node.pop((how_many - 1))
       end
-    end
-    @pop_data
+    # end
+    @pop_data.join
   end
 
 end

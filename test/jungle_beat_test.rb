@@ -134,6 +134,7 @@ class JungleBeatTest < Minitest::Test
     jb = JungleBeat.new("beep bop a loo bah")
     assert_equal 5, jb.count
     jb.pop(2)
+    # binding.pry
     assert_equal 3, jb.count
     assert jb.includes?("beep")
     refute jb.includes?("bah")
@@ -187,6 +188,18 @@ class JungleBeatTest < Minitest::Test
   def test_insert_can_throw_any_elements_after_the_head
     jb = JungleBeat.new("bop tweet dobber dow beep")
     assert_equal "bop BLIP BLAP tweet dobber dow beep", jb.insert(0, "BLIP BLAP")
+  end
+
+
+  def test_extension_change_and_reset_rate_and_voice
+    jb = JungleBeat.new("bop tweet dobber dow beep")
+    jb.play
+    jb.rate = "100"
+    jb.voice = "Alice"
+    jb.play
+    jb.reset_voice
+    jb.reset_rate
+    jb.play
   end
 
 end

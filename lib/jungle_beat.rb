@@ -2,17 +2,36 @@ require 'pry'
 require './lib/node'
 
 class JungleBeat
+  attr_accessor :rate, :voice
   attr_reader :head, :data
 
   def initialize(sounds)
     input = sounds.split
     @head = Node.new(input)
+    @rate = "500"
+    @voice = "Boing"
   end
 
   def play
-    beats = @head.find_data
-    `say -r 500 -v Boing "#{beats}"`
+    beats = all
+    `say -r #{@rate} -v #{@voice} "#{beats}"`
     @head.count
+  end
+
+  def reset_rate
+    @rate = "500"
+  end
+
+  def rate(num)
+    @rate = num.to_s
+  end
+
+  def voice(name)
+    @voice = name.upcase
+  end
+
+  def reset_voice
+    @voice = "Boing"
   end
 
   def append(beat)
@@ -34,20 +53,6 @@ class JungleBeat
     ### at the beginning of the list
   end
 
-  def insert(index, elements)
-    elements.split.count.times do
-      @head.insert(index, elements.split.shift)
-      # binding.pry
-      elements = (elements.split - ([elements.split.shift])).join(" ")
-      index += 1
-    end
-    all
-  end
-
-  def includes?(beat)
-    @head.includes?(beat)
-  end
-
   def pop(how_many=1)
     if @head.data == nil
       "This is an empty list"
@@ -60,6 +65,20 @@ class JungleBeat
     end
     ### one or more elements from the end of the list
     ### (takes num arg - default 1)
+  end
+
+  def insert(index, elements)
+    elements.split.count.times do
+      @head.insert(index, elements.split.shift)
+      # binding.pry
+      elements = (elements.split - ([elements.split.shift])).join(" ")
+      index += 1
+    end
+    all
+  end
+
+  def includes?(beat)
+    @head.includes?(beat)
   end
 
   def count
