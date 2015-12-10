@@ -108,13 +108,21 @@ class JungleBeatTest < Minitest::Test
   end
 
   def test_it_can_prepend_multiple_beats
-    skip
     jb = JungleBeat.new("beep bop a loo bah")
     assert_equal 5, jb.count
-    jb.prepend("bleet blap")
-    binding.pry
+    jb.prepend("BLIP BLAP")
     assert_equal 7, jb.count
-    assert jb.includes?("blap")
+    assert jb.includes?("BLAP")
+  end
+
+  def test_it_can_prepend_several_beats
+    jb = JungleBeat.new("beep bop a loo bah")
+    assert_equal 5, jb.count
+    jb.prepend("BLIP BLAP BLORP BARF")
+    assert_equal 9, jb.count
+    assert jb.includes?("BLORP")
+    expected = "BLIP BLAP BLORP BARF beep bop a loo bah"
+    assert_equal expected, jb.all
   end
 
   def test_it_can_pop_a_single_element_list
@@ -190,8 +198,15 @@ class JungleBeatTest < Minitest::Test
     assert_equal "bop BLIP BLAP tweet dobber dow beep", jb.insert(0, "BLIP BLAP")
   end
 
+  def test_insert_can_throw_three_elements_after_the_head
+    jb = JungleBeat.new("bop tweet dobber dow beep")
+    assert_equal "bop BLIP BLAP BLEEP tweet dobber dow beep", jb.insert(0, "BLIP BLAP BLEEP")
+  end
+
+
 
   def test_extension_change_and_reset_rate_and_voice
+    skip
     jb = JungleBeat.new("bop tweet dobber dow beep")
     jb.play
     jb.rate = "100"

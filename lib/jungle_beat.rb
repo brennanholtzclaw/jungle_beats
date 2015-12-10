@@ -42,16 +42,31 @@ class JungleBeat
   def prepend(beat)
     old_head = @head
     input = beat.split
-    @head = Node.new([input.shift])
-    input = input.reverse
-    while !input.empty?
-      @head.next_node = Node.new([input.shift])
-    end
-    @head.next_node = Node.new([input.shift]) if !input.empty?
+    @head = Node.new([input[-1]])
     @head.next_node = old_head
-    # prepend
-    ### at the beginning of the list
+    beats = (beat.split - (beat.split.pop.split)).join(" ")
+    prepend(beats) if !beats.empty?
   end
+
+
+  #   old_head = @head
+  #   input = beat.split
+  #   @head = Node.new([input[0]])
+  #   @head.next_node = old_head
+  #   more_beats = beat.split - (beat.split.shift.split)
+  #   if !more_beats.empty?
+  #     more_beats.count.times do
+  #       old_head = @head
+  #       input = more_beats
+  #       @head = Node.new([input[0]])
+  #       new_input = input - input.shift.split
+  #       input = new_input
+  #       @head.next_node = old_head
+  #     end
+  #   end
+  #   # prepend
+  #   ### at the beginning of the list
+  # end
 
   def pop(how_many=1)
     if @head.data == nil

@@ -2,7 +2,7 @@ require 'pry'
 
 class Node
   attr_accessor :data, :head, :tail, :next_node, :all_data, :find_counter,
-                :insert_counter
+                :insert_counter, :pop_data
 
   def initialize(data)
     @data = data.shift
@@ -46,14 +46,6 @@ class Node
     end
   end
 
-  # def play
-  #   `say -r 500 -v Boing "#{@data}"`
-  #   @next_node.play if @next_node.data != nil
-  #   #this plays recursively, but it seems slow, I may want to grab all the
-  #   #data and play directly from the JB class - might be easier with the
-  #   #extension too.
-  # end
-
   def count
     if @data == nil
       0
@@ -95,26 +87,15 @@ class Node
       pop_data(how_many)
     end
     @pop_data.join(" ")
-    # still need to let pop take an argument for multiple beats
-    # binding.pry
-
   end
 
   def pop_data(how_many)
-    # how_many.times do
-      if @next_node.data != nil && @next_node.next_node.data == nil
-        @pop_data << @next_node.data
-        @next_node = nil
-      # elsif @next_node.next_node.data == nil
-      #   @pop_data << @next_node.next_node.data
-      #   @next_node.next_node = nil
-      # elsif @data.nil?
-      #   puts "my data is nil"
-      #   break
-      else
-        @next_node.pop((how_many - 1))
-      end
-    # end
+    if @next_node.data != nil && @next_node.next_node.data == nil
+      @pop_data << @next_node.data
+      @next_node = nil
+    else
+      @next_node.pop((how_many - 1))
+    end
     @pop_data.join
   end
 
